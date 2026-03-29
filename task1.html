@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task1: todolist</title>
+
+    <style>
+        li {
+            cursor: pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <h1> To do list</h1>
+    <div class = "container">
+        <input type="text" id="taskinput">
+        <button id="addbtn"> Add task </button>
+        <ul class="tasks"></ul>
+    </div>
+
+
+    <script>
+        const inputext = document.getElementById("taskinput");
+        const addbtn = document.getElementById("addbtn");
+        const tasks = document.querySelector(".tasks");
+        
+
+        addbtn.addEventListener("click", function() {
+            const task = inputext.value;
+            if(task) {
+                const li = document.createElement("li");
+                li.textContent = task;
+
+                li.addEventListener("click", function() {
+                    li.remove(); 
+                });
+
+                tasks.appendChild(li);
+                inputext.value = "";
+            }
+        })
+    </script>
+</body>
+</html>
