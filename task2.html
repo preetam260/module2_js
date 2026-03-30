@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task2 : Simple calculator app</title>
+</head>
+<body>
+    <textarea id="result" rows="1" cols="20" readonly></textarea>
+
+    <h3>Select operator</h3>
+    <select id="operator">
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+    </select>
+    <h3>Enter number</h3>
+    <input type="number" id="num1">
+    <button id="calculate">Calculate</button>
+    
+
+    <script>
+        const number1 = document.getElementById("num1");
+        const operator = document.getElementById("operator");
+        const result = document.getElementById("result");
+
+        calculate.addEventListener("click", function() {
+            if(number1.value) {
+                const cur = result.value ? parseFloat(result.value) : 0;
+                const num2 = parseFloat(number1.value);
+                const op = operator.value;
+
+                let res;
+                switch(op) {
+                    case "+":
+                        res = parseFloat(cur) + parseFloat(num2);
+                        break;
+                    case "-":
+                        res = parseFloat(cur) - parseFloat(num2);
+                        break;
+                    case "*":
+                        res = parseFloat(cur) * parseFloat(num2);          
+                        break;
+                    case "/":
+                        if(parseFloat(num2) === 0) {
+                            alert("Cannot divide by zero");
+                            return;
+                        }
+                        res = parseFloat(cur) / parseFloat(num2);
+                        break;
+                    default:
+                        alert("Invalid operator");
+                        return; 
+                }
+
+                result.value = res;
+                number1.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
