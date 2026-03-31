@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            margin: auto auto;
+        }
+        .modal {
+            display: none; 
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal.active {
+            display: flex;
+        }
+        #modal-img {
+            max-width: 80%;
+            max-height: 80%;
+            border: 5px solid white;
+        }
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h3>Task 3: dynamic modal app</h3>
+    
+    <div class="image-gallery">
+        <img src="image4.jpg" id="img1">
+        <img src="image5.jpg" id="img2">
+        <img src="image6.jpg" id="img3">
+        <img src="image7.jpg" id="img4">
+    </div>
+
+    <div id="lightbox" class="modal">
+        <span class="close">&times;</span>
+        <img id="modal-img" src="" alt="Full size">
+    </div>
+    <script>
+        const lightbox = document.querySelector(".modal");
+        const closeBtn = document.querySelector(".close");
+        const modalimg = document.getElementById("modal-img");
+        const images = document.getElementsByTagName("img");
+    
+        for (let img of images) {
+            if (img.id !== "modal-img") {
+                img.addEventListener("click", function() {
+                    modalimg.src = img.src; 
+                    lightbox.classList.add("active"); 
+                });
+            }
+        }   
+        closeBtn.addEventListener("click", function() {
+            lightbox.classList.remove("active"); 
+        });
+    </script>
+</body>
+</html>
