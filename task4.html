@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Weather App</title>
+</head>
+<body>
+
+    <h1>Weather App</h1>
+    
+    <input type="text" id="cityInput" placeholder="Enter city name...">
+    <button id="getWeatherBtn">Get Weather</button>
+
+    <div id="weatherResult">
+        <p>Search for a city to see the weather.</p>
+    </div>
+
+    <script>
+        const apiKey = '0dc4a0b9057ef473c39d88086b42582c';
+        const btn = document.getElementById('getWeatherBtn');
+        const input = document.getElementById('cityInput');
+        const resultDiv = document.getElementById('weatherResult');
+    
+        btn.addEventListener('click', () => {
+            const city = input.value;
+            if (!city) {
+                alert("Please enter a city name");
+                return;
+            }
+            resultDiv.innerHTML = "Loading...";
+    
+            
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error("City not found or network error");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    resultDiv.innerHTML = `
+                        <h3>${data.name}, ${data.sys.country}</h3>
+                        <p>Temperature: ${data.main.temp} °C</p>
+                        <p>Humidity: ${data.main.humidity}%</p>
+                        <p>Conditions: ${data.weather[0].description}</p>
+                    `;
+                })
+                .catch(error => {
+                    resultDiv.innerHTML = `<p style="color: red;">Error: ${error.message}</p>`;
+                });
+        });
+    </script>
+</body>
+</html>
